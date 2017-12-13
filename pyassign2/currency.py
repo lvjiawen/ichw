@@ -60,8 +60,7 @@ def has_error(s):
     """Judge whether the information contains errors
     """
     s = s.split('"')
-    if s[13] == "":
-        return False
+    return s[13]
 
 
 """module C:return the string obtained after visiting the url
@@ -73,8 +72,7 @@ def curenccy(currency_from, currency_to, amount_from):
     """
     from urllib.request import urlopen
 
-    doc = "http://cs1110.cs.cornell.edu/2016fa/a1server.php?from=%s&to=%s&amt=\
-            %f" % (currency_from, currency_to, float(amount_from))
+    doc = "http://cs1110.cs.cornell.edu/2016fa/a1server.php?from=%s&to=%s&amt=%f" % (currency_from, currency_to, float(amount_from))
     doc = urlopen(doc)
     docstr = doc.read()
     doc.close()
@@ -110,7 +108,7 @@ def test_B():
     """determine whether the str of url can be obtained correctly
     """
     s = curenccy(currency_from, currency_to, amount_from)
-    assert(has_error(s) == 0)
+    assert(has_error(s)=="")
     assert(first_inside_quote(s) == "from")
     assert(get_from != "")
     assert(get_to != "")
@@ -119,7 +117,7 @@ def test_B():
 def test_C():
     """determine whether the information is successfully gained
     """
-    assert(has_error(curenccy(currency_from, currency_to, amount_from)) == 0)
+    assert(has_error(curenccy(currency_from, currency_to, amount_from)) == "")
 
 
 def test_all():
